@@ -1,20 +1,36 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 📊 Amazon Sales Analysis: NLP & Business Insights
 
-# Run and deploy your AI Studio app
+![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python)
+![Pandas](https://img.shields.io/badge/Pandas-Data_Analysis-150458?style=for-the-badge&logo=pandas)
+![NLP](https://img.shields.io/badge/NLP-WordCloud_%26_Transformers-green?style=for-the-badge)
 
-This contains everything you need to run your app locally.
+## 🎯 O Desafio de Negócio
+O objetivo deste projeto foi analisar dados reais de vendas da Amazon para responder a uma pergunta crucial de marketing:
+> *"O preço alto garante uma avaliação de 5 estrelas? E o que realmente motiva o cliente a elogiar um produto?"*
 
-View your app in AI Studio: https://ai.studio/apps/drive/1O4Rw7ArNZILwHzBB8C6NAgv6oNpSF2jI
+Ao longo da análise, descobrimos que os métodos estatísticos tradicionais não eram suficientes, exigindo uma abordagem criativa com **Processamento de Linguagem Natural (NLP)**.
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
+## 🛠️ Tecnologias Utilizadas
+* **Linguagem:** Python
+* **Manipulação de Dados:** Pandas, NumPy
+* **Visualização:** Matplotlib, Seaborn
+* **NLP (Texto):** WordCloud, Transformers (Hugging Face - BART/T5)
 
+---
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🚀 Passo a Passo do Projeto
+
+### 1. Engenharia de Dados (Data Cleaning)
+O dataset bruto continha moedas em Rúpia Indiana (₹) e strings sujas. O primeiro passo foi limpar e converter para Real (BRL).
+
+```python
+# Exemplo de limpeza e conversão
+def limpar_moeda(valor):
+    if isinstance(valor, str):
+        valor = valor.replace('₹', '').replace(',', '').strip()
+    return float(valor)
+
+# Convertendo Rúpia para Real (Cotação Ex: 0.06)
+df['preco_convertido'] = df['discounted_price'].apply(limpar_moeda) * 0.06
